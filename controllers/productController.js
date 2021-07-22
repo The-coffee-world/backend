@@ -4,6 +4,8 @@ const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 const APIFeatures = require('../utils/apiFeatures');
 
+const productsList = require('../data/products.json')
+
 // Create new product => /api/v1/admin/product/new
 exports.newProduct = catchAsyncErrors(async (req, res, next) => {
 
@@ -14,6 +16,19 @@ exports.newProduct = catchAsyncErrors(async (req, res, next) => {
     res.status(201).json({
         success: true,
         product
+    })
+})
+
+// Create new products => /api/v1/admin/products/new
+exports.newProducts = catchAsyncErrors(async (req, res, next) => {
+
+    productsList.map(element => element.user = req.user.id);
+    
+    const products = await Product.insertMany(productsList);
+    
+    res.status(201).json({
+        success: true,
+        products
     })
 })
 
