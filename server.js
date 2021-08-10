@@ -20,11 +20,11 @@ dotenv.config({ path: './config/config.env' })
 connectDatabase();
 
 // Setting up cloudinary config
-cloudinary.config({
+/* cloudinary.config({
     CLOUD_NAME: process.env.CLOUDINARY_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET
-})
+}) */
 
 const server = app.listen(process.env.PORT, () => {
     console.log(`Server started on PORT: ${process.env.PORT} in ${process.env.NODE_ENV} mode.`)
