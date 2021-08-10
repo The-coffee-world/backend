@@ -12,11 +12,11 @@ const { send } = require('process');
 // Register a user => /api/v1/register
 exports.registerUser = catchAsyncErrors( async (req, res, next) => {
 
-    const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    /* const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
         folder: 'avatars',
         width: 150,
         crop: "scale"
-    })
+    }) */
 
     const { name, email, password } = req.body;
 
@@ -25,11 +25,15 @@ exports.registerUser = catchAsyncErrors( async (req, res, next) => {
         email,
         password,
         avatar: {
-            public_id: result.public_id,
-            url: result.secure_url
+            public_id: 'v1624967948/sample',
+            url: 'https://res.cloudinary.com/dqniwdlsv/image/upload/v1624967948/sample.jpg'
         }
     })
 
+    /* avatar: {
+        public_id: result.public_id,
+        url: result.secure_url
+    } */
     sendToken(user, 200, res);
 })
 
